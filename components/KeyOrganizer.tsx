@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import KeyInput from './KeyInput';
 import { KeyData, countWikiKeys, generateFullKey } from '../utils/keyValidator';
 
@@ -9,11 +9,13 @@ export default function KeyOrganizer() {
     Array(8).fill(null).map(() => ({ key: '', wiki: 0 }))
   );
 
-  const handleKeyChange = (index: number, value: KeyData) => {
-    const newKeys = [...keys];
-    newKeys[index] = value;
-    setKeys(newKeys);
-  };
+  const handleKeyChange = useCallback((index: number, value: KeyData) => {
+    setKeys(prev => {
+      const newKeys = [...prev];
+      newKeys[index] = value;
+      return newKeys;
+    });
+  }, []);
 
   const wikiCounts = countWikiKeys(keys);
   const fullKey = generateFullKey(keys);
