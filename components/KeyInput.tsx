@@ -29,16 +29,16 @@ export default function KeyInput({ keynum, value, onChange }: KeyInputProps) {
     };
     
     onChange(newValue);
-  }, [inputText, radioButton, onChange]);
+  }, [inputText, radioButton]);
 
   const getErrorStyle = () => {
-    if (validation.error === null) return '';
-    return validation.error === 'danger' ? 'border-red-500 focus:border-red-500' : 'border-green-500 focus:border-green-500';
+    if (validation.error === null) return 'border-gray-300 focus:border-blue-500';
+    return validation.error === 'danger' ? 'border-red-500 focus:border-red-600' : 'border-green-500 focus:border-green-600';
   };
 
   const getMessageStyle = () => {
     if (validation.error === null) return 'text-gray-500';
-    return validation.error === 'danger' ? 'text-red-500' : 'text-green-500';
+    return validation.error === 'danger' ? 'text-red-600' : 'text-green-600';
   };
 
   const getDisplayMessage = () => {
@@ -49,27 +49,33 @@ export default function KeyInput({ keynum, value, onChange }: KeyInputProps) {
   };
 
   return (
-    <div className="mb-6">
-      <div className="flex items-start space-x-4">
-        <div className="w-20 pt-2">
-          <label className="block text-sm font-medium text-gray-700">
+    <div className="bg-gray-50 rounded-lg p-6 border-2 border-gray-200 hover:border-blue-300 transition-colors">
+      <div className="flex items-center space-x-6">
+        {/* Key label */}
+        <div className="flex items-center space-x-3 min-w-[120px]">
+          <div className="w-10 h-10 bg-blue-500 rounded-lg flex items-center justify-center text-white text-lg font-bold">
+            {keynum}
+          </div>
+          <label className="text-gray-700 font-medium text-lg">
             Key {keynum}
           </label>
         </div>
         
         <div className="flex-1">
-          <div className="flex items-center space-x-2">
+          {/* Input and radio buttons */}
+          <div className="flex items-center space-x-4 mb-3">
             <input
               type="text"
               value={inputText}
               onChange={(e) => setInputText(e.target.value)}
-              placeholder={`Key ${keynum}`}
-              className={`flex-1 px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 bg-gray-900 text-white placeholder-gray-400 ${getErrorStyle()}`}
+              placeholder={`Enter key ${keynum}...`}
+              className={`flex-1 px-4 py-3 rounded-lg border-2 focus:outline-none focus:ring-0 transition-colors bg-white text-gray-900 placeholder-gray-500 ${getErrorStyle()}`}
             />
             
-            <div className="flex space-x-1">
+            {/* Radio buttons */}
+            <div className="flex space-x-2">
               {[1, 2, 3].map((num) => (
-                <label key={num} className="flex items-center">
+                <label key={num} className="cursor-pointer">
                   <input
                     type="radio"
                     name={`radio-${keynum}`}
@@ -78,19 +84,20 @@ export default function KeyInput({ keynum, value, onChange }: KeyInputProps) {
                     onChange={(e) => setRadioButton(e.target.value)}
                     className="sr-only"
                   />
-                  <span className={`px-3 py-1 border rounded cursor-pointer transition-colors ${
+                  <div className={`w-12 h-10 rounded-lg flex items-center justify-center text-lg font-bold border-2 transition-colors ${
                     radioButton === num.toString() 
-                      ? 'bg-purple-600 text-white border-purple-600' 
-                      : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50'
+                      ? 'bg-blue-500 text-white border-blue-500' 
+                      : 'bg-white text-gray-600 border-gray-300 hover:border-blue-300 hover:bg-blue-50'
                   }`}>
                     {num}
-                  </span>
+                  </div>
                 </label>
               ))}
             </div>
           </div>
           
-          <div className={`mt-1 text-sm ${getMessageStyle()}`}>
+          {/* Status message */}
+          <div className={`text-sm font-medium ${getMessageStyle()}`}>
             {getDisplayMessage()}
           </div>
         </div>

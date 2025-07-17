@@ -5,7 +5,7 @@ import './globals.css';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'Game II Key Organizer',
+  title: 'WTTG2 Key Organizer',
   description: 'Organize your Game II keys efficiently',
 };
 
