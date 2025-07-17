@@ -38,21 +38,21 @@ export default function KeyOrganizer() {
       <div className="grid grid-cols-3 gap-4 mb-8">
         <div className="text-center">
           <p className={`text-lg font-semibold ${
-            wikiCounts['1'] > 3 ? 'text-red-600' : 'text-gray-700'
+            wikiCounts['1'] > 3 ? 'text-red-600 font-bold' : 'text-gray-700'
           }`}>
             Wiki 1 keys: {wikiCounts['1']}
           </p>
         </div>
         <div className="text-center">
           <p className={`text-lg font-semibold ${
-            wikiCounts['2'] > 3 ? 'text-red-600' : 'text-gray-700'
+            wikiCounts['2'] > 3 ? 'text-red-600 font-bold' : 'text-gray-700'
           }`}>
             Wiki 2 keys: {wikiCounts['2']}
           </p>
         </div>
         <div className="text-center">
           <p className={`text-lg font-semibold ${
-            wikiCounts['3'] > 3 ? 'text-red-600' : 'text-gray-700'
+            wikiCounts['3'] > 3 ? 'text-red-600 font-bold' : 'text-gray-700'
           }`}>
             Wiki 3 keys: {wikiCounts['3']}
           </p>
